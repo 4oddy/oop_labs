@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 public class Parrot extends Bird {
   private List<String> vocabulary;
@@ -10,6 +11,7 @@ public class Parrot extends Bird {
     super(name, age, weight, wingspan, color);
     this.favoriteWord = favoriteWord;
     this.tame = isTame;
+    this.vocabulary = new ArrayList<>();
   }
 
   public void makeTame() {
@@ -17,8 +19,12 @@ public class Parrot extends Bird {
   }
 
   public void setFavoriteWord(String word) {
-    learnWord(word);
-    this.favoriteWord = word;
+    if (vocabulary.contains(word)) {
+      this.favoriteWord = word;
+      return;
+    }
+
+    throw new IllegalArgumentException("Такого слова нет в словаре.");
   }
 
   public void setVocabulary(List<String> vocabulary) {
